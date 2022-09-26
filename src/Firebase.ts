@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCMCpCtx_RAfGNxdZF_iK4TLKualKamsiE",
@@ -12,8 +12,12 @@ const firebaseConfig = {
   measurementId: "G-5RHR0Z1JZX",
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const db = getFirestore(app);
 
-export default analytics;
+const isEnulating = window.location.hostname === "localhost";
+if (isEnulating) {
+  connectFirestoreEmulator(db, "localhost", 8080);
+}
+
+export default db;
