@@ -10,7 +10,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./Firebase";
 
 const App: React.FC = () => {
-  const [user, loading, _error] = useAuthState(auth);
+  const [user, _loading, _error] = useAuthState(auth);
 
   const [bodyMassInpputValue, setBodyMassInputValue] =
     useState<BodyMassInputValue>("");
@@ -23,6 +23,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     // login処理が終わり次第データをとりにいく
+    // userの中身が変更されたら発火 (null -> User)
     if (user?.uid !== undefined) {
       void fetchData();
     }
@@ -45,7 +46,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="App">
+    <div className="App" key={"App"}>
       <Login isLogin={user?.uid !== undefined} />
       {user?.uid !== undefined ? (
         <>

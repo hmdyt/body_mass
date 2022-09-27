@@ -10,9 +10,7 @@ interface LoginProps {
 const Login = (props: LoginProps): JSX.Element => {
   type Provider = GoogleAuthProvider;
   const handleLogin = (provider: Provider): void => {
-    void (async () => {
-      await signInWithPopup(auth, provider);
-    })();
+    void signInWithPopup(auth, provider);
   };
 
   return (
