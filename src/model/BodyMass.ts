@@ -9,7 +9,7 @@ import {
   where,
 } from "firebase/firestore";
 
-const tableName = "bodyMassModelTest03";
+const tableName = "bodyMass";
 const bodyMassollection = collection(db, tableName);
 
 type UserID = string | undefined;
