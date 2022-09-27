@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import BodyMassInput, { BodyMassInputValue } from "./components/BodyMassInput";
+import BodyMassPlot from "./components/BodyMassPlot";
 
 import { Timestamp } from "firebase/firestore";
 import BodyMassModel, * as BodyMass from "./model/BodyMass";
@@ -33,6 +34,7 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
+      <BodyMassPlot bodyMassList={bodyMasses} />
       <BodyMassInput
         value={bodyMassInpputValue}
         handleChange={setBodyMassInputValue}

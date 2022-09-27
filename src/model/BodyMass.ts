@@ -1,5 +1,12 @@
 import db from "../Firebase";
-import { Timestamp, collection, addDoc, getDocs } from "firebase/firestore";
+import {
+  Timestamp,
+  collection,
+  addDoc,
+  getDocs,
+  query,
+  orderBy,
+} from "firebase/firestore";
 
 const tableName = "bodyMassModelTest02";
 const bodyMassollection = collection(db, tableName);
@@ -19,7 +26,8 @@ const add = (mass: number): BodyMassModel => {
 };
 
 const all = async (): Promise<BodyMassModel[]> => {
-  const queryShapShot = await getDocs(bodyMassollection);
+  const q = query(bodyMassollection, orderBy("created"));
+  const queryShapShot = await getDocs(q);
   const bodyMasses: BodyMassModel[] = queryShapShot.docs.map((doc) => {
     const d = doc.data();
     return {
